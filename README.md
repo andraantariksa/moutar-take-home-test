@@ -101,6 +101,8 @@ Please create ERD for the flow above.
 
 [Full version](3a.png)
 
+There is a duplication of `products` table fields in `transaction_product` table. It is intended as a snapshot of the product the customer buys.
+
 #### 2
 
 Please create query to get best seller product for male and female.
@@ -236,6 +238,30 @@ Please create query to get customer that spends the most money.
 
 ##### Answer
 
+Multiple maximum value
+
+```sql
+SELECT *
+FROM customers
+INNER JOIN (
+    SELECT transactions.customer_id, SUM(transaction_product.price * transaction_product.quantity) as total_spent
+    FROM transaction_product
+    INNER JOIN transactions ON transaction_product.order_id = transactions.id
+    GROUP BY transactions.customer_id
+) AS customer_total_spent
+ON customer_total_spent.customer_id = customers.id
+WHERE customer_total_spent.total_spent = (
+    SELECT SUM(transaction_product.price * transaction_product.quantity) as total_spent
+    FROM transaction_product
+    INNER JOIN transactions ON transaction_product.order_id = transactions.id
+    GROUP BY transactions.customer_id
+    ORDER BY SUM(transaction_product.price * transaction_product.quantity) DESC
+    LIMIT 1
+);
+```
+
+Single maximum value
+
 ```sql
 SELECT *
 FROM customers
@@ -261,3 +287,7 @@ FROM transactions
 GROUP BY DATE_ADD('1970-01-01 00:00:01.000000', INTERVAL ((TIMESTAMPDIFF(HOUR, '1970-01-01 00:00:01.000000', transactions.created_at) DIV 2) * 2) HOUR)
 ORDER BY DATE_ADD('1970-01-01 00:00:01.000000', INTERVAL ((TIMESTAMPDIFF(HOUR, '1970-01-01 00:00:01.000000', transactions.created_at) DIV 2) * 2) HOUR);
 ```
+
+###### Explanation:
+
+The transaction can be grouped by how many hour after some time (In this case, it is Unix epoch). To group the transactions every 2 hours, I use integer division on the hour and multiplied it again (rounding to floor even number).

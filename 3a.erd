@@ -2,6 +2,7 @@ Table transactions {
   id int [primary key]
   customer_id int [not null, unique]
   status varchar [not null]
+  deleted_at datetime
   created_at datetime [not null]
 }
 
@@ -14,6 +15,7 @@ Table transaction_product [headercolor: #d35400] {
   description text [not null]
   quantity int [not null]
   category_id int [not null]
+  deleted_at datetime
   created_at datetime [not null]
 }
 
@@ -23,6 +25,7 @@ Table products [headercolor: #d35400] {
   price int [not null]
   description text [not null]
   category_id int [not null]
+  deleted_at datetime
   created_at datetime [not null]
 }
 
@@ -32,12 +35,15 @@ Table customers {
   email varchar [not null, unique]
   gender varchar  [not null]
   date_of_birth varchar [not null]
+  deleted_at datetime
   created_at datetime [not null]
 }
 
 Table categories [headercolor: #d35400] {
   id int [primary key]
   name varchar [not null]
+  deleted_at datetime
+  created_at datetime [not null]
 }
 
 Table category_parent [headercolor: #d35400] {
@@ -55,6 +61,10 @@ Ref {
 
 Ref {
   transaction_product.product_id > products.id
+}
+
+Ref {
+  transaction_product.category_id > categories.id
 }
 
 Ref {
