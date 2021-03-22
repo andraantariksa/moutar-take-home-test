@@ -12,9 +12,20 @@ html, body {
 
 /* Container */
 
-.main-container {
-    margin: 5px 40px;
-    flex: 1 0 auto;
+@media screen and (max-width: 1500px) {
+    .main-container {
+        margin: 5px 30px;
+        flex: 1 0 auto;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .main-container {
+        margin: 5px 30px;
+        flex: 1 0 auto;
+        width: 1220px;
+        align-self: center;
+    }
 }
 
 .footer-container {
@@ -61,7 +72,7 @@ html, body {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 18px;
+        gap: 12px
     }
 }
 
@@ -71,11 +82,12 @@ html, body {
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 18px;
+        gap: 12px
     }
 
     .card {
         flex: 1 0 45%;
+        max-width: 45%;
     }
 }
 
@@ -85,25 +97,42 @@ html, body {
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 18px
+        gap: 12px
     }
 
     .card {
         flex: 1 0 29%;
+        max-width: 29%;
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
     .content-row-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 18px
+        gap: 12px
     }
 
     .card {
         flex: 1 0 21%;
+        max-width: 21%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .content-row-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px
+    }
+
+    .card {
+        width: 290px;
+        max-width: 290px;
     }
 }
 
