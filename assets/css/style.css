@@ -12,9 +12,20 @@ html, body {
 
 /* Container */
 
-.main-container {
-    margin: 5px 40px;
-    flex: 1 0 auto;
+@media screen and (max-width: 1500px) {
+    .main-container {
+        margin: 5px 30px;
+        flex: 1 0 auto;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .main-container {
+        margin: 5px 30px;
+        flex: 1 0 auto;
+        width: 1420px;
+        align-self: center;
+    }
 }
 
 .footer-container {
@@ -56,26 +67,27 @@ html, body {
     padding: 4px 0px 4px 0px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
     .content-row-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 18px;
+        gap: 12px
     }
 }
 
-@media screen and (min-width: 550px) and (max-width: 800px) {
+@media screen and (min-width: 600px) and (max-width: 800px) {
     .content-row-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 18px;
+        gap: 12px
     }
 
     .card {
         flex: 1 0 45%;
+        max-width: 49%;
     }
 }
 
@@ -85,25 +97,42 @@ html, body {
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 18px
+        gap: 12px
     }
 
     .card {
         flex: 1 0 29%;
+        max-width: 32%;
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
     .content-row-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 18px
+        gap: 12px
     }
 
     .card {
         flex: 1 0 21%;
+        max-width: 24%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .content-row-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px
+    }
+
+    .card {
+        width: 290px;
+        max-width: 290px;
     }
 }
 
